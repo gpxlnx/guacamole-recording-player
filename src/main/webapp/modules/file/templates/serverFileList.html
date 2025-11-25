@@ -1,0 +1,67 @@
+<div class="guac-server-file-list">
+    <div class="guac-server-file-list-header">
+        <div class="guac-server-file-list-title">
+            <h2><i class="fas fa-server"></i> Recordings from Server</h2>
+            <div class="guac-server-file-list-status" ng-if="lastUpdate">
+                <small>
+                    <i class="fas fa-clock"></i> 
+                    Last update: {{ lastUpdate | date:'HH:mm:ss' }}
+                    <span ng-if="recordingsCount > 0"> • {{ recordingsCount }} recording{{ recordingsCount !== 1 ? 's' : '' }}</span>
+                    <span ng-if="autoRefresh" class="guac-auto-refresh-indicator">
+                        <i class="fas fa-sync-alt fa-spin"></i> Auto-refresh ({{ refreshInterval / 1000 }}s)
+                    </span>
+                </small>
+            </div>
+        </div>
+        <div class="guac-server-file-list-actions">
+            <button class="guac-toggle-auto-refresh" 
+                    ng-click="toggleAutoRefresh()" 
+                    ng-class="{'active': autoRefresh}"
+                    title="Toggle auto-refresh">
+                <i class="fas" ng-class="autoRefresh ? 'fa-pause-circle' : 'fa-play-circle'"></i>
+            </button>
+            <button class="guac-refresh-button" ng-click="refreshNow()" ng-disabled="loading">
+                <i class="fas fa-sync-alt" ng-class="{'fa-spin': loading}"></i> Refresh Now
+            </button>
+        </div>
+    </div>
+    
+    <div class="guac-server-file-list-loading" ng-show="loading && recordings.length === 0">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Loading recordings...</p>
+    </div>
+    
+    <div class="guac-server-file-list-error" ng-show="error">
+        <i class="fas fa-exclamation-circle"></i>
+        <p>{{ errorMessage || 'Failed to load recordings from server' }}</p>
+    </div>
+    
+    <div class="guac-server-file-list-content" ng-hide="loading || error">
+        <div ng-if="recordings.length === 0" class="guac-server-file-list-empty">
+            <i class="fas fa-folder-open"></i>
+            <p>No recordings found on server</p>
+        </div>
+        
+        <ul class="guac-server-file-list-items" ng-if="recordings.length > 0">
+            <li ng-repeat="recording in recordings" 
+                class="guac-server-file-item"
+                ng-click="selectFile(recording)"
+                ng-class="{'selected': file && file.name === recording.name}">
+                <div class="guac-server-file-item-icon">
+                    <i class="fas fa-file-video"></i>
+                </div>
+                <div class="guac-server-file-item-info">
+                    <div class="guac-server-file-item-name">{{ recording.name }}</div>
+                    <div class="guac-server-file-item-meta">
+                        <span class="guac-server-file-item-size">{{ formatFileSize(recording.size) }}</span>
+                        <span class="guac-server-file-item-date">{{ formatDate(recording.modified) }}</span>
+                    </div>
+                </div>
+                <div class="guac-server-file-item-action">
+                    <i class="fas fa-play"></i>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+

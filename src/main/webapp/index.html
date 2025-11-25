@@ -48,19 +48,33 @@
         <!-- Player for selected recording -->
         <guac-player blob="selectedRecording"></guac-player>
 
-        <!-- Recording selector (local files) -->
+        <!-- Recording selector (local files and server files) -->
         <div class="guac-player-recording-selector" ng-hide="remoteMode && !error">
             <h1 ng-show="selectedRecording"
                 class="guac-player-selected-file"><i class="fas fa-film"></i>{{ selectedRecording.name }}</h1>
-            <guac-file-chooser file="selectedRecording" ng-hide="remoteMode">
-                <p class="guac-player-help-no-recording"
-                   ng-hide="selectedRecording || error">No session recording is
-                currently open. Please select a recording to view.</p>
-                <p class="guac-player-help-recording-error"
-                   ng-hide="selectedRecording || !error"><i class="fas fa-exclamation-triangle"></i>
-                {{ errorMessage || 'The selected recording cannot be played. The recording may be corrupt, or you may not have permission to read the recording. Please select a different recording.' }}</p>
-                <span class="guac-player-button">Browse...</span>
-            </guac-file-chooser>
+            
+            <!-- Server file list -->
+            <guac-server-file-list 
+                file="selectedRecording"
+                loading="serverLoading"
+                error="serverError"
+                error-message="serverErrorMessage"
+                ng-hide="remoteMode">
+            </guac-server-file-list>
+            
+            <!-- Local file chooser -->
+            <div class="guac-local-file-section" ng-hide="remoteMode">
+                <h3 class="guac-section-divider">Or select from your computer:</h3>
+                <guac-file-chooser file="selectedRecording">
+                    <p class="guac-player-help-no-recording"
+                       ng-hide="selectedRecording || error">No session recording is
+                    currently open. Please select a recording to view.</p>
+                    <p class="guac-player-help-recording-error"
+                       ng-hide="selectedRecording || !error"><i class="fas fa-exclamation-triangle"></i>
+                    {{ errorMessage || 'The selected recording cannot be played. The recording may be corrupt, or you may not have permission to read the recording. Please select a different recording.' }}</p>
+                    <span class="guac-player-button">Browse Local Files...</span>
+                </guac-file-chooser>
+            </div>
         </div>
         
         <!-- Remote file downloading indicator -->

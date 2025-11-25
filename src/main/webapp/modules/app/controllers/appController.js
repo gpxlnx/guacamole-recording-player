@@ -26,6 +26,27 @@
  */
 angular.module('app').controller('appController', ['$scope', 'urlParamService', 'remoteFileService',
     function appController($scope, urlParamService, remoteFileService) {
+    
+    /**
+     * Whether the application is loading a file from server.
+     *
+     * @type {Boolean}
+     */
+    $scope.serverLoading = false;
+    
+    /**
+     * Whether an error occurred loading files from server.
+     *
+     * @type {Boolean}
+     */
+    $scope.serverError = false;
+    
+    /**
+     * The error message for server file loading.
+     *
+     * @type {String}
+     */
+    $scope.serverErrorMessage = null;
 
     /**
      * The currently selected recording, or null if no recording is selected.

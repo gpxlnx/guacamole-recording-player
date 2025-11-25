@@ -1,0 +1,179 @@
+/*
+ * Styles for server file list
+ */
+
+.guac-server-file-list {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 900px;
+    color: white;
+}
+
+.guac-server-file-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.guac-server-file-list-title {
+    flex: 1;
+}
+
+.guac-server-file-list-header h2 {
+    margin: 0 0 5px 0;
+    font-size: 1.2em;
+    color: white;
+}
+
+.guac-server-file-list-status {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85em;
+}
+
+.guac-auto-refresh-indicator {
+    margin-left: 10px;
+    color: #4a90e2;
+}
+
+.guac-server-file-list-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.guac-toggle-auto-refresh {
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.2s;
+}
+
+.guac-toggle-auto-refresh:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.guac-toggle-auto-refresh.active {
+    background: #4a90e2;
+    color: white;
+    border-color: #4a90e2;
+}
+
+.guac-refresh-button {
+    padding: 8px 16px;
+    background: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.guac-refresh-button:hover:not(:disabled) {
+    background: #357abd;
+}
+
+.guac-refresh-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.guac-server-file-list-loading,
+.guac-server-file-list-error,
+.guac-server-file-list-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.guac-server-file-list-loading i,
+.guac-server-file-list-error i {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #4a90e2;
+}
+
+.guac-server-file-list-error i {
+    color: #e74c3c;
+}
+
+.guac-server-file-list-empty i {
+    font-size: 3em;
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: 15px;
+}
+
+.guac-server-file-list-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.guac-server-file-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.guac-server-file-item:hover {
+    background: rgba(74, 144, 226, 0.2);
+    border-color: #4a90e2;
+    box-shadow: 0 2px 4px rgba(74, 144, 226, 0.3);
+}
+
+.guac-server-file-item.selected {
+    background: rgba(74, 144, 226, 0.3);
+    border-color: #4a90e2;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.4);
+}
+
+.guac-server-file-item-icon {
+    margin-right: 12px;
+    font-size: 1.5em;
+    color: #4a90e2;
+    width: 30px;
+    text-align: center;
+}
+
+.guac-server-file-item-info {
+    flex: 1;
+}
+
+.guac-server-file-item-name {
+    font-weight: 500;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.guac-server-file-item-meta {
+    font-size: 0.85em;
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    gap: 15px;
+}
+
+.guac-server-file-item-action {
+    color: #4a90e2;
+    font-size: 1.2em;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.guac-server-file-item:hover .guac-server-file-item-action {
+    opacity: 1;
+}
+
